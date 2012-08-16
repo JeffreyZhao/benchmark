@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <script src="wind-all-0.7.0.js"></script>
+    <script>
+        function require() {
+            return Wind;
+        }
+    
+        function load(path) {
+            var script = document.createElement("script");
+            script.src = path;
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+    </script>
+</head>
+<body>
+    Click and checkout the console:
+    <input type="button" value="JIT" onclick="load('jit.js')" />
+    <input type="button" value="AOT" onclick="load('aot.js')" />
+</body>
+</html>
+
