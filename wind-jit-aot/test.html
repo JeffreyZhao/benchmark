@@ -7,6 +7,16 @@
         function require() {
             return Wind;
         }
+        
+        var logDiv;
+        
+        window.onload = function () {
+            logDiv = document.getElementById("log");
+        }
+        
+        console.log = function (text) {
+            logDiv.innerHTML += (text + "<br />");
+        }
     
         function load(path) {
             var script = document.createElement("script");
@@ -16,9 +26,10 @@
     </script>
 </head>
 <body>
-    Click and checkout the console:
+    Click and checkout the output:
     <input type="button" value="JIT" onclick="load('jit.js')" />
     <input type="button" value="AOT" onclick="load('aot.js')" />
+    <div id="log"></div>
 </body>
 </html>
 
