@@ -10,6 +10,18 @@ var evalRandomLCG = function (seed) {
     return randomLCG(seed);
 };
 
+var parseRandomLCG = function (seed) {
+    if (typeof(document)!='undefined') {
+        var src="var parsedRandomLCG="+nativeRandomLCG.toString()+";";
+        var script = document.createElement("script");
+        script.innerHTML = src;
+        document.getElementsByTagName('head')[0].appendChild(script);
+        return parsedRandomLCG(seed);
+    } else {
+        return evalRandomLCG(seed);
+    }
+}
+
 var test = function (iteration) {
     for (var i = 1; i < arguments.length; i++) {
         var suite = arguments[i];
@@ -26,6 +38,11 @@ var test = function (iteration) {
     }
 }
 
+var parseSuite = {
+    name: "parse",
+    target: parseRandomLCG(100)
+};
+
 var nativeSuite = {
     name: "native",
     target: nativeRandomLCG(100)
@@ -40,6 +57,6 @@ var iterations = [100, 200, 300];
 
 for (var round = 0; round < iterations.length; round++) {
     console.log("Round " + round);
-    test(iterations[round] * 1000 * 1000, nativeSuite, evalSuite);
+    test(iterations[round] * 1000 * 1000, nativeSuite, evalSuite, parseSuite);
     console.log("");
 }
